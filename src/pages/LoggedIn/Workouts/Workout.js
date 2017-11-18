@@ -20,9 +20,17 @@ const WorkoutWrap = styled.li`
   padding: 20px;
 `
 
+const WorkoutInformation = styled.div`
+  align-items: center;
+  display: flex;
+`
 const WorkoutTitle = styled.header`font-weight: 700;`
 const WorkoutTime = styled.div`font-size: 12px;`
 const WorkoutCoach = styled.div`font-size: 12px;`
+const WorkoutQueue = styled.div`
+  font-size: 14px;
+  margin-left: auto;
+`
 
 const Participants = styled.ul`
   background-color: #dadada;
@@ -50,6 +58,8 @@ export default class Workout extends Component<Props, State> {
         }
         slots {
           open
+          total
+          waiting
         }
         time
         wod
@@ -73,15 +83,24 @@ export default class Workout extends Component<Props, State> {
 
     return (
       <WorkoutWrap key={activity.id} wod={activity.wod}>
-        <div onClick={this.toggleDisplayParticipants}>
-          <WorkoutTime>{activity.time}</WorkoutTime>
-          <WorkoutTitle>{activity.name}</WorkoutTitle>
-          <WorkoutCoach>{activity.coach}</WorkoutCoach>
-        </div>
+        <WorkoutInformation onClick={this.toggleDisplayParticipants}>
+          <div>
+            <WorkoutTime>{activity.time}</WorkoutTime>
+            <WorkoutTitle>{activity.name}</WorkoutTitle>
+            <WorkoutCoach>{activity.coach}</WorkoutCoach>
+          </div>
+
+          <WorkoutQueue>
+            Ledigt: {activity.slots.open} / Reserver: {activity.slots.waiting} /
+            Platser: {activity.slots.total}
+          </WorkoutQueue>
+        </WorkoutInformation>
 
         {displayParticipants && (
           <Participants>
-            {activity.participants.map(person => <li key={person.id}>{person.fullname}</li>)}
+            {activity.participants.map(person => (
+              <li key={person.id}>{person.fullname}</li>
+            ))}
           </Participants>
         )}
       </WorkoutWrap>
