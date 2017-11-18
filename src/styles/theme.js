@@ -1,4 +1,4 @@
-export function opacity(color, value) {
+export function opacity (color, value) {
   const rgb = color.match(/(\d{1,3}), (\d{1,3}), (\d{1,3})/)
   return `rgba(${rgb[0]}, ${value})`
 }
@@ -12,5 +12,5 @@ export default {
   HELG: '#ffdb4d',
   FITNESS: '#00b300',
   MASTODONT: '#ffdb4d',
-  TRYOUT: '#252525'
+  TRYOUT: '#252525',
 }

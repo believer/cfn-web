@@ -12,7 +12,6 @@ type Props = {
 const Label = styled.label`
   display: block;
   font-size: 15px;
-  font-weight: 600;
   margin-bottom: 10px;
 `
 
