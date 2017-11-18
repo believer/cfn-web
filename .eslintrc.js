@@ -33,12 +33,14 @@ module.exports = {
       'error',
       {
         env: 'apollo',
+        schemaJson: require('./schema.json'),
       },
     ],
     'graphql/named-operations': [
       'error',
       {
         env: 'apollo',
+        schemaJson: require('./schema.json'),
       },
     ],
   },
