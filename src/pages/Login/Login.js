@@ -22,6 +22,7 @@ type Props = {
 const LoginBackground = styled.div`
   align-items: center;
   background-image: url(${backgroundImage});
+  background-size: cover;
   display: flex;
   justify-content: center;
   height: 100vh;
@@ -42,7 +43,9 @@ const LoginWrap = styled.div`
   border-radius: 3px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
   padding: 20px;
+  position: relative;
   width: 300px;
+  z-index: 1;
 `
 
 const Logo = styled.img`
