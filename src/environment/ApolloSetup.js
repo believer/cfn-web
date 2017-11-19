@@ -11,8 +11,8 @@ const middlewareLink = new ApolloLink((operation, forward) => {
   // Set token on all requests
   operation.setContext({
     headers: {
-      authorization: `Basic ${token}` || null
-    }
+      authorization: `Basic ${token}` || null,
+    },
   })
 
   return forward(operation)
@@ -20,5 +20,5 @@ const middlewareLink = new ApolloLink((operation, forward) => {
 
 export const client = new ApolloClient({
   link: middlewareLink.concat(httpLink),
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__)
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
 })
