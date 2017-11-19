@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import type { WorkoutActivityFragment } from '../../../schema.flow.js'
-import { opacity } from '../../../styles/theme'
 import format from 'date-fns/format'
 import svLocale from 'date-fns/locale/sv'
 
@@ -16,22 +15,21 @@ type State = {
   displayParticipants: boolean
 }
 
-const WorkoutWrap = styled.li`
+const WorkoutWrap = styled.div`
   border-bottom: 1px solid #d4d4d4;
-  border-left: 4px solid ${({ theme, wod }) => theme[wod]};
+  border-left: 5px solid ${({ theme, wod }) => theme[wod]};
 `
 
 const WorkoutInformation = styled.div`
   align-items: center;
-  background-color: ${({ booked, theme }) =>
-    booked ? opacity(theme.lochmara, '0.1') : '#fff'};
+  background-color: ${({ booked, theme }) => (booked ? '#f1f8ff' : '#fff')};
   cursor: pointer;
   display: flex;
   padding: 20px;
-  transition: background-color 100ms ease;
+  transition: background-color 150ms ease-in-out;
 
   &:hover {
-    background-color: #e1e1e1;
+    background-color: #efefef;
   }
 `
 
@@ -39,13 +37,14 @@ const WorkoutTitle = styled.header`font-weight: 700;`
 const WorkoutTime = styled.div`font-size: 12px;`
 const WorkoutCoach = styled.div`font-size: 12px;`
 const WorkoutQueue = styled.div`
+  color: #586069;
   font-size: 12px;
   margin-left: auto;
   text-align: right;
 `
 
 const Participants = styled.ul`
-  background-color: #dadada;
+  background-color: #fff;
   display: grid;
   font-size: 14px;
   grid-column-gap: 20px;

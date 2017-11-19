@@ -842,7 +842,7 @@ declare module 'date-fns/locale/sv/build_format_locale/index' {
   declare module.exports: any
 }
 
-declare module 'date-fns/locale/sv/index' {
+declare module 'date-fns/locale/sv' {
   declare module.exports: any
 }
 
