@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { client } from '../environment/ApolloSetup'
 import { injectGlobal, ThemeProvider } from 'styled-components'
 import asyncComponent from '../environment/asyncComponent'
