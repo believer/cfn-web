@@ -22,7 +22,7 @@ const WorkoutWrap = styled.div`
 
 const WorkoutInformation = styled.div`
   align-items: center;
-  background-color: ${({ booked, theme }) => (booked ? '#f1f8ff' : '#fff')};
+  background-color: ${({ booked }) => (booked ? '#f1f8ff' : '#fff')};
   cursor: pointer;
   display: flex;
   padding: 20px;
