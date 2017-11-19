@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import type { WorkoutActivityFragment } from '../../../schema.flow.js'
+import { opacity } from '../../../styles/theme'
+import format from 'date-fns/format'
+import svLocale from 'date-fns/locale/sv'
 
 type Props = {
   activity: WorkoutActivityFragment
@@ -14,22 +17,31 @@ type State = {
 }
 
 const WorkoutWrap = styled.li`
-  background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
   border-left: 4px solid ${({ theme, wod }) => theme[wod]};
-  padding: 20px;
 `
 
 const WorkoutInformation = styled.div`
   align-items: center;
+  background-color: ${({ booked, theme }) =>
+    booked ? opacity(theme.lochmara, '0.1') : '#fff'};
+  cursor: pointer;
   display: flex;
+  padding: 20px;
+  transition: background-color 100ms ease;
+
+  &:hover {
+    background-color: #e1e1e1;
+  }
 `
+
 const WorkoutTitle = styled.header`font-weight: 700;`
 const WorkoutTime = styled.div`font-size: 12px;`
 const WorkoutCoach = styled.div`font-size: 12px;`
 const WorkoutQueue = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   margin-left: auto;
+  text-align: right;
 `
 
 const Participants = styled.ul`
@@ -39,7 +51,6 @@ const Participants = styled.ul`
   grid-column-gap: 20px;
   grid-row-gap: 5px;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 20px;
   padding: 20px;
 `
 
@@ -83,16 +94,24 @@ export default class Workout extends Component<Props, State> {
 
     return (
       <WorkoutWrap key={activity.id} wod={activity.wod}>
-        <WorkoutInformation onClick={this.toggleDisplayParticipants}>
+        <WorkoutInformation
+          booked={activity.booked}
+          onClick={this.toggleDisplayParticipants}
+        >
           <div>
-            <WorkoutTime>{activity.time}</WorkoutTime>
+            <WorkoutTime>
+              {format(activity.date, 'dddd', { locale: svLocale })}{' '}
+              {activity.time}
+            </WorkoutTime>
             <WorkoutTitle>{activity.name}</WorkoutTitle>
             <WorkoutCoach>{activity.coach}</WorkoutCoach>
           </div>
 
           <WorkoutQueue>
-            Ledigt: {activity.slots.open} / Reserver: {activity.slots.waiting} /
-            Platser: {activity.slots.total}
+            <div>
+              Platser: {activity.slots.open} / {activity.slots.total}
+            </div>
+            <div>Reserver: {activity.slots.waiting}</div>
           </WorkoutQueue>
         </WorkoutInformation>
 

@@ -1,15 +1,17 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { filter } from 'graphql-anywhere'
 import { graphql } from 'react-apollo'
 import format from 'date-fns/format'
 import isFuture from 'date-fns/is_future'
 import addDays from 'date-fns/add_days'
+import svLocale from 'date-fns/locale/sv'
 import styled from 'styled-components'
 import Workout from './Workout'
-import type { ActivitiesQuery } from '../../../schema.flow.js'
+import WorkoutFilter from './WorkoutFilter'
+import type { ActivitiesQuery, WOD } from '../../../schema.flow.js'
 
 type Props = {
   data: ActivitiesQuery & {
@@ -20,15 +22,20 @@ type Props = {
   }
 }
 
+type State = {
+  filteredActivities: WOD[]
+}
+
 const WorkoutsWrap = styled.div`
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08);
   display: grid;
+  grid-column-gap: 40px;
   grid-row-gap: 20px;
   grid-template-columns: 1fr;
   margin: 60px auto;
   width: 960px;
 `
 const WorkoutDay = styled.section``
+const WorkoutsInDay = styled.section`box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08);`
 const WorkoutDayTitle = styled.header`
   color: #000;
   font-family: 'Lato', sans-serif;
@@ -37,48 +44,98 @@ const WorkoutDayTitle = styled.header`
   margin-top: 20px;
 `
 
-const Workouts = ({ data: { activities, error, loading } }: Props) => {
-  if (error) {
-    return <div>{error.message}</div>
+class Workouts extends Component<Props, State> {
+  state = {
+    filteredActivities: [
+      'DAGENS',
+      'PERFORMANCE',
+      'FITNESS',
+      'HELG',
+      'MASTODONT',
+      'TRYOUT',
+    ],
   }
 
-  if (loading) {
-    return <div>Loading</div>
+  toggleType = (wod: WOD) => {
+    this.setState(state => ({
+      filteredActivities: state.filteredActivities.includes(wod)
+        ? state.filteredActivities.filter(activity => activity !== wod)
+        : state.filteredActivities.concat([wod]),
+    }))
   }
 
-  const sortedByDay = activities
-    .filter(activity => isFuture(activity.timestamp * 1000))
-    .reduce((acc, curr) => {
-      if (!acc[curr.date]) {
-        acc[curr.date] = []
-      }
+  render () {
+    const { data: { activities, myActivities, error, loading } } = this.props
+    const { filteredActivities } = this.state
 
-      acc[curr.date].push(curr)
+    if (error) {
+      return <div>{error.message}</div>
+    }
 
-      return acc
-    }, {})
+    if (loading) {
+      return <div>Loading</div>
+    }
 
-  return (
-    <WorkoutsWrap>
-      <ul>
-        {Object.keys(sortedByDay).map((date, i) => {
-          const activitiesInDay = sortedByDay[date]
+    const sortedByDay = activities
+      .filter(activity => filteredActivities.includes(activity.wod))
+      .filter(activity => isFuture(activity.timestamp * 1000))
+      .reduce((acc, curr) => {
+        if (!acc[curr.date]) {
+          acc[curr.date] = []
+        }
 
-          return (
-            <WorkoutDay key={`workout-${i}`}>
-              <WorkoutDayTitle>{date}</WorkoutDayTitle>
-              {activitiesInDay.map(activity => (
-                <Workout
-                  activity={filter(Workout.fragments.activity, activity)}
-                  key={activity.id}
-                />
-              ))}
-            </WorkoutDay>
-          )
-        })}
-      </ul>
-    </WorkoutsWrap>
-  )
+        acc[curr.date].push(curr)
+
+        return acc
+      }, {})
+
+    return (
+      <WorkoutsWrap>
+        <ul>
+          <WorkoutDayTitle>Mina bokningar</WorkoutDayTitle>
+          <WorkoutsInDay>
+            {myActivities.map(activity => {
+              return (
+                <WorkoutDay key={`workout-${activity.id}`}>
+                  <Workout
+                    activity={filter(Workout.fragments.activity, activity)}
+                    key={activity.id}
+                  />
+                </WorkoutDay>
+              )
+            })}
+          </WorkoutsInDay>
+        </ul>
+
+        <WorkoutFilter
+          selected={filteredActivities}
+          toggleType={this.toggleType}
+        />
+
+        <ul>
+          {Object.keys(sortedByDay).map((date, i) => {
+            const activitiesInDay = sortedByDay[date]
+
+            return (
+              <WorkoutDay key={`workout-${i}`}>
+                <WorkoutDayTitle>
+                  {format(date, 'dddd YYYY-MM-DD', { locale: svLocale })}
+                </WorkoutDayTitle>
+                <WorkoutsInDay>
+                  {activitiesInDay.map(activity => (
+                    <Workout
+                      activity={filter(Workout.fragments.activity, activity)}
+                      key={activity.id}
+                    />
+                  ))}
+                </WorkoutsInDay>
+              </WorkoutDay>
+            )
+          })}
+        </ul>
+      </WorkoutsWrap>
+    )
+  }
 }
 
 const WorkoutsQuery = gql`
@@ -86,6 +143,9 @@ const WorkoutsQuery = gql`
     activities(startDate: $startDate, endDate: $endDate) {
       ...WorkoutActivity
       timestamp
+    }
+    myActivities {
+      ...WorkoutActivity
     }
   }
 
