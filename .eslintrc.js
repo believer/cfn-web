@@ -5,11 +5,12 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      modules: true,
-    },
+      modules: true
+    }
   },
   env: {
     browser: true,
+    jest: true
   },
   extends: ['plugin:react/recommended'],
   plugins: ['react', 'flowtype', 'graphql'],
@@ -33,15 +34,15 @@ module.exports = {
       'error',
       {
         env: 'apollo',
-        schemaJson: require('./schema.json'),
-      },
+        schemaJson: require('./schema.json')
+      }
     ],
     'graphql/named-operations': [
       'error',
       {
         env: 'apollo',
-        schemaJson: require('./schema.json'),
-      },
-    ],
-  },
+        schemaJson: require('./schema.json')
+      }
+    ]
+  }
 }
