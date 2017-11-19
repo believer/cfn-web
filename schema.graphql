@@ -1,5 +1,5 @@
 # source: http://localhost:3000/graphql
-# timestamp: Sat Nov 18 2017 18:54:41 GMT+0100 (Västeuropa, normaltid)
+# timestamp: Sun Nov 19 2017 08:47:45 GMT+0100 (Västeuropa, normaltid)
 
 type Activity {
   booked: Boolean!
@@ -10,7 +10,7 @@ type Activity {
   location: String!
   name: String!
   participants: [Participant!]!
-  slots: Slots
+  slots: Slots!
   time: String!
   timestamp: Int!
   wod: WOD!

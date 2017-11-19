@@ -32,8 +32,29 @@ export type ActivitiesQuery = {|
       fullname: string,
       id: ?number,
     |} >,
-    slots: ? {|
+    slots: {|
       open: number,
+      total: number,
+      waiting: number,
+    |},
+    time: string,
+    wod: WOD,
+    timestamp: number,
+  |} >,
+  myActivities:  Array< {|
+    booked: boolean,
+    coach: string,
+    date: string,
+    id: number,
+    name: string,
+    participants:  Array< {|
+      fullname: string,
+      id: ?number,
+    |} >,
+    slots: {|
+      open: number,
+      total: number,
+      waiting: number,
     |},
     time: string,
     wod: WOD,
@@ -58,8 +79,10 @@ export type WorkoutActivityFragment = {|
     fullname: string,
     id: ?number,
   |} >,
-  slots: ? {|
+  slots: {|
     open: number,
+    total: number,
+    waiting: number,
   |},
   time: string,
   wod: WOD,
