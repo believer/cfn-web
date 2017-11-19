@@ -37,9 +37,8 @@ const App = () => {
         <BrowserRouter>
           <ScrollToTop>
             <Switch>
-              <Route exact path="/" render={() => <Redirect to="/login" />} />
-              <Route path="/dashboard" render={LoggedIn} />
-              <Route path="/login" component={AsyncLogin} />
+              <Route exact path="/" component={AsyncLogin} />
+              <Route path="/workouts" render={LoggedIn} />
             </Switch>
           </ScrollToTop>
         </BrowserRouter>

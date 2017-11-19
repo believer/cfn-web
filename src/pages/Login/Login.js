@@ -73,7 +73,7 @@ class Login extends Component<Props> {
     })
 
     localStorage.setItem('token', result.data.login)
-    this.props.history.push('/dashboard/workouts')
+    this.props.history.push('/workouts')
   }
 
   render () {

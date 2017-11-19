@@ -13,7 +13,7 @@ const LoggedIn = () => {
   return (
     <Home>
       <Switch>
-        <Route path="/dashboard/workouts" component={AsyncWorkouts} />
+        <Route path="/workouts" component={AsyncWorkouts} />
       </Switch>
     </Home>
   )
