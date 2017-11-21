@@ -34,6 +34,7 @@ const WorkoutsWrap = styled.div`
   margin: 60px auto;
   width: 960px;
 `
+const WorkoutsList = styled.div`margin-bottom: 40px;`
 const WorkoutDay = styled.section``
 const WorkoutsInDay = styled.section`box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08);`
 const WorkoutDayTitle = styled.header`
@@ -91,7 +92,7 @@ class Workouts extends Component<Props, State> {
 
     return (
       <WorkoutsWrap>
-        <ul>
+        <WorkoutsList>
           <WorkoutDayTitle>Mina bokningar</WorkoutDayTitle>
           <WorkoutsInDay>
             {myActivities
@@ -107,14 +108,14 @@ class Workouts extends Component<Props, State> {
                 )
               })}
           </WorkoutsInDay>
-        </ul>
+        </WorkoutsList>
 
         <WorkoutFilter
           selected={filteredActivities}
           toggleType={this.toggleType}
         />
 
-        <ul>
+        <WorkoutsList>
           {Object.keys(sortedByDay).map((date, i) => {
             const activitiesInDay = sortedByDay[date]
 
@@ -134,7 +135,7 @@ class Workouts extends Component<Props, State> {
               </WorkoutDay>
             )
           })}
-        </ul>
+        </WorkoutsList>
       </WorkoutsWrap>
     )
   }

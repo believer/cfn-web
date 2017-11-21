@@ -9,7 +9,15 @@ type Props = {
   toggleType: (wod: WOD) => void
 }
 
-const WorkoutFilterWrap = styled.div`display: flex;`
+const WorkoutFilterWrap = styled.div`
+  align-items: center;
+  display: flex;
+`
+
+const WorkoutFilterTitle = styled.div`
+  font-size: 18px;
+  font-weight: 700;
+`
 
 const WorkoutWODType = styled.div`
   background-color: ${({ selected, theme, wod }) =>
@@ -19,19 +27,14 @@ const WorkoutWODType = styled.div`
   color: ${({ selected, inverse }) =>
     selected ? (inverse ? 'inherit' : ' #fff') : 'inherit'};
   cursor: pointer;
+  margin-left: 10px;
   padding: 5px 15px;
-
-  &:hover {
-  }
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
 `
 
 const WorkoutFilter = ({ selected, toggleType }: Props) => {
   return (
     <WorkoutFilterWrap>
+      <WorkoutFilterTitle>Filter</WorkoutFilterTitle>
       <WorkoutWODType
         inverse
         selected={selected.includes('DAGENS')}

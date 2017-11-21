@@ -6,11 +6,12 @@ export function opacity (color, value) {
 export default {
   /* Primary colors */
   lochmara: 'rgb(0, 133, 202)', // #0085ca
+  pistachio: 'rgb(139, 209, 0)', //#8BD100
 
   DAGENS: '#ffdb4d',
   PERFORMANCE: '#0085ca',
   HELG: '#ffdb4d',
-  FITNESS: '#00b300',
+  FITNESS: 'rgb(0, 179, 0)', // #00b300
   MASTODONT: '#ffdb4d',
   TRYOUT: '#252525',
 }

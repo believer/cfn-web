@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/WorkoutFilter renders WorkoutFilter 1`] = `
+.c0 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.c2 {
+  border-radius: 3px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.08);
+  color: inherit;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 5px 15px;
+}
+
+.c3 {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.08);
+  color: inherit;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 5px 15px;
+}
+
+<WorkoutFilter
+  selected={
+    Array [
+      "DAGENS",
+    ]
+  }
+  toggleType={[Function]}
+>
+  <styled.div>
+    <div
+      className="c0"
+    >
+      <styled.div>
+        <div
+          className="c1"
+        >
+          Filter
+        </div>
+      </styled.div>
+      <styled.div
+        inverse={true}
+        onClick={[Function]}
+        selected={true}
+        wod="DAGENS"
+      >
+        <div
+          className="c2"
+          onClick={[Function]}
+          selected={true}
+        >
+          Dagens pass
+        </div>
+      </styled.div>
+      <styled.div
+        inverse={true}
+        onClick={[Function]}
+        selected={false}
+        wod="HELG"
+      >
+        <div
+          className="c3"
+          onClick={[Function]}
+          selected={false}
+        >
+          Helgpass
+        </div>
+      </styled.div>
+      <styled.div
+        inverse={true}
+        onClick={[Function]}
+        selected={false}
+        wod="MASTODONT"
+      >
+        <div
+          className="c3"
+          onClick={[Function]}
+          selected={false}
+        >
+          Mastodontpass
+        </div>
+      </styled.div>
+      <styled.div
+        onClick={[Function]}
+        selected={false}
+        wod="PERFORMANCE"
+      >
+        <div
+          className="c3"
+          onClick={[Function]}
+          selected={false}
+        >
+          Performance
+        </div>
+      </styled.div>
+      <styled.div
+        onClick={[Function]}
+        selected={false}
+        wod="FITNESS"
+      >
+        <div
+          className="c3"
+          onClick={[Function]}
+          selected={false}
+        >
+          Fitness
+        </div>
+      </styled.div>
+      <styled.div
+        onClick={[Function]}
+        selected={false}
+        wod="TRYOUT"
+      >
+        <div
+          className="c3"
+          onClick={[Function]}
+          selected={false}
+        >
+          Prova på
+        </div>
+      </styled.div>
+    </div>
+  </styled.div>
+</WorkoutFilter>
+`;

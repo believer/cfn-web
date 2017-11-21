@@ -12,7 +12,7 @@ const AsyncLogin = asyncComponent(() => import('./Login/Login'))
 
 injectGlobal`
   body {
-    background-color: #e5e5e5;
+    background-color: #fafbfc;
     color: rgb(34, 34, 34);
     margin: 0;
     padding: 0;
