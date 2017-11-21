@@ -73,6 +73,7 @@ export default class Workout extends Component<Props, State> {
           waiting
         }
         time
+        timestamp
         wod
       }
     `,

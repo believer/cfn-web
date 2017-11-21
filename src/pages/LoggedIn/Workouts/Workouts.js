@@ -94,16 +94,18 @@ class Workouts extends Component<Props, State> {
         <ul>
           <WorkoutDayTitle>Mina bokningar</WorkoutDayTitle>
           <WorkoutsInDay>
-            {myActivities.map(activity => {
-              return (
-                <WorkoutDay key={`workout-${activity.id}`}>
-                  <Workout
-                    activity={filter(Workout.fragments.activity, activity)}
-                    key={activity.id}
-                  />
-                </WorkoutDay>
-              )
-            })}
+            {myActivities
+              .filter(activity => isFuture(activity.timestamp * 1000))
+              .map(activity => {
+                return (
+                  <WorkoutDay key={`workout-${activity.id}`}>
+                    <Workout
+                      activity={filter(Workout.fragments.activity, activity)}
+                      key={activity.id}
+                    />
+                  </WorkoutDay>
+                )
+              })}
           </WorkoutsInDay>
         </ul>
 
@@ -142,7 +144,6 @@ const WorkoutsQuery = gql`
   query Activities($startDate: String, $endDate: String) {
     activities(startDate: $startDate, endDate: $endDate) {
       ...WorkoutActivity
-      timestamp
     }
     myActivities {
       ...WorkoutActivity
