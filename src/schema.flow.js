@@ -3,71 +3,71 @@
 //  This file was automatically generated and should not be edited.
 
 export type WOD =
-  "DAGENS" |
-  "PERFORMANCE" |
-  "FITNESS" |
-  "HELG" |
-  "MASTODONT" |
-  "TRYOUT";
-
+  | 'DAGENS'
+  | 'PERFORMANCE'
+  | 'FITNESS'
+  | 'HELG'
+  | 'MASTODONT'
+  | 'TRYOUT'
 
 export type LoginInput = {|
   username: string,
-  password: string,
-|};
+  password: string
+|}
 
 export type ActivitiesQueryVariables = {|
   startDate?: ?string,
-  endDate?: ?string,
-|};
+  endDate?: ?string
+|}
 
 export type ActivitiesQuery = {|
-  activities:  Array< {|
+  activities: Array<{|
     booked: boolean,
     coach: string,
     date: string,
     id: number,
     name: string,
-    participants:  Array< {|
+    participants: Array<{|
       fullname: string,
-      id: ?number,
-    |} >,
+      id: ?number
+    |}>,
     slots: {|
       open: number,
       total: number,
-      waiting: number,
+      waiting: number
     |},
     time: string,
     wod: WOD,
+    timestamp: number
+  |}>,
+  myActivities: Array<{|
+    booked: boolean,
+    coach: string,
+    date: string,
+    id: number,
+    name: string,
+    participants: Array<{|
+      fullname: string,
+      id: ?number
+    |}>,
+    slots: {|
+      open: number,
+      total: number,
+      waiting: number
+    |},
+    time: string,
     timestamp: number,
-  |} >,
-  myActivities:  Array< {|
-    booked: boolean,
-    coach: string,
-    date: string,
-    id: number,
-    name: string,
-    participants:  Array< {|
-      fullname: string,
-      id: ?number,
-    |} >,
-    slots: {|
-      open: number,
-      total: number,
-      waiting: number,
-    |},
-    time: string,
-    wod: WOD,
-  |} >,
-|};
+    wod: WOD
+  |}>
+|}
 
 export type loginMutationVariables = {|
-  input: LoginInput,
-|};
+  input: LoginInput
+|}
 
 export type loginMutation = {|
-  login: string,
-|};
+  login: string
+|}
 
 export type WorkoutActivityFragment = {|
   booked: boolean,
@@ -75,15 +75,16 @@ export type WorkoutActivityFragment = {|
   date: string,
   id: number,
   name: string,
-  participants:  Array< {|
+  participants: Array<{|
     fullname: string,
-    id: ?number,
-  |} >,
+    id: ?number
+  |}>,
   slots: {|
     open: number,
     total: number,
-    waiting: number,
+    waiting: number
   |},
   time: string,
-  wod: WOD,
-|};
+  timestamp: number,
+  wod: WOD
+|}

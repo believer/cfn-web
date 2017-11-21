@@ -82,6 +82,10 @@ export default class Workout extends Component<Props, State> {
     displayParticipants: false,
   }
 
+  shouldComponentUpdate (nextProps: Props, nextState: State) {
+    return nextState.displayParticipants !== this.state.displayParticipants
+  }
+
   toggleDisplayParticipants = () => {
     this.setState(state => ({
       displayParticipants: !state.displayParticipants,
@@ -93,7 +97,7 @@ export default class Workout extends Component<Props, State> {
     const { displayParticipants } = this.state
 
     return (
-      <WorkoutWrap key={activity.id} wod={activity.wod}>
+      <WorkoutWrap wod={activity.wod}>
         <WorkoutInformation
           booked={activity.booked}
           onClick={this.toggleDisplayParticipants}
@@ -117,8 +121,8 @@ export default class Workout extends Component<Props, State> {
 
         {displayParticipants && (
           <Participants>
-            {activity.participants.map(person => (
-              <li key={person.id}>{person.fullname}</li>
+            {activity.participants.map((person, i) => (
+              <li key={person.id || `person-${i}`}>{person.fullname}</li>
             ))}
           </Participants>
         )}
