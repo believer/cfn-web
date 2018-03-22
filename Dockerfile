@@ -8,8 +8,6 @@ RUN npm install -g serve
 
 ADD . /app
 
-RUN npm run build
-
 EXPOSE 4000
 
-CMD serve -s build
+CMD ["sh", "-c", "npm run build && serve -s build"]
