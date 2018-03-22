@@ -10,4 +10,6 @@ ADD . /app
 
 RUN npm run build
 
+EXPOSE 4000
+
 CMD serve -s build
